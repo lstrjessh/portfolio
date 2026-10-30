@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Lester Heyrana | Computer Engineer",
-  description: "Selected work from Lester Heyrana, a computer engineer based in Iligan City.",
+  description: "Selected work from Lester Heyrana, a computer engineer based in the Philippines.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
