@@ -96,3 +96,5 @@ nav a[aria-current="page"]{color:var(--accent)}
 .hero h1.hero-name{white-space:nowrap;font-size:clamp(42px,7.5vw,110px);letter-spacing:-.055em;line-height:1.1}@media(max-width:400px){.hero h1.hero-name{font-size:10.5vw}}
 
 .privacy-policy{max-width:900px}.privacy-policy .post-body h2{font-size:20px;font-weight:500;margin:30px 0 12px}.privacy-policy .post-body a{color:var(--accent);overflow-wrap:anywhere}
+
+.contact-address{font-size:14px;line-height:1.8;margin:32px 0 0;overflow-wrap:anywhere}.privacy-address{overflow-wrap:anywhere}

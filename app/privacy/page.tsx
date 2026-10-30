@@ -22,7 +22,7 @@ export default function Privacy() {
         <h2>External links</h2>
         <p>Links to GitHub, LinkedIn, research papers, and project sites take you to services with their own privacy policies.</p>
         <h2>Questions</h2>
-        <p>Contact <a href="mailto:lesterjess.heyrana@g.msuiit.edu.ph">lesterjess.heyrana@g.msuiit.edu.ph</a> with any questions about this policy.</p>
+        <p><a href="mailto:lesterjess.heyrana@g.msuiit.edu.ph">Email me</a> with any questions about this policy.</p>
       </div>
     </article>
     <footer><Link href="/">← Portfolio</Link><span>© 2026 LESTER HEYRANA</span><Link href="/privacy" aria-current="page">Privacy</Link></footer>
