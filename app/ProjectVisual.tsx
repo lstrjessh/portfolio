@@ -1,7 +1,8 @@
 import ScannerCube from "./ScannerCube";
+import GeoSafeVisual from "./GeoSafeVisual";
 
 const labels: Record<string, string> = {
-  "01": "GEOHAZARD MAPPING", "02": "SPECTRAL ANALYSIS", "03": "TERRAIN ASSESSMENT",
+  "01": "GEOHAZARD MAPPING", "02": "SPECTRAL ANALYSIS", "03": "SUSCEPTIBILITY / SATELLITE CHANGE",
   "04": "POINT CLOUD CLASSIFICATION", "05": "INSTRUCTION PIPELINE", "06": "EDGE INFERENCE",
   "07": "POINT CLOUD", "08": "WALL FOLLOWING",
 };
@@ -31,7 +32,7 @@ export default function ProjectVisual({ id }: { id: string }) {
           <path className="sweep" opacity=".3" d="M240 30V165"/>
           <text x="45" y="25">ABSORBANCE</text><text x="440" y="185" textAnchor="end">WAVELENGTH →</text>
         </>}
-        {id === "03" && <>{Array.from({length:7},(_,i)=><path className="contour" key={i} d={`M${90-i*23} 180Q${160-i*14} ${-10+i*15} 240 ${40+i*14}T${400+i*18} 180`} style={{animationDelay:`${i*-.5}s`}}/>)}<path strokeDasharray="4 5" d="M100 110H380M240 25V180"/><circle className="pulse-ring" cx="240" cy="110" r="14"/><text x="330" y="35">NDVI / SLOPE</text></>}
+        {id === "03" && <GeoSafeVisual />}
         {id === "04" && <>
           <g className="classifier-sphere">
             {Array.from({length:65},(_,i)=>{const y=1-2*(i+.5)/65;const r=Math.sqrt(1-y*y);const theta=i*2.39996;return <circle key={i} cx={130+Math.cos(theta)*r*48} cy={100+y*48} r="1.8" fill="currentColor" opacity={.4+(Math.sin(theta)+1)*.25} stroke="none"/>})}

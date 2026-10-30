@@ -21,13 +21,13 @@ export const posts = [
   },
   {
     slug: "geosafe-satellite-mapping", period: "2025", category: "Geospatial", title: "Trying satellite data for landslide mapping",
-    summary: "GeoSafe started as a prototype for the PhilSA Space Business Innovation Challenge. Here’s what the map is actually showing.",
+    summary: "GeoSafe started at a PhilSA challenge. I’ve since rebuilt it into a web workspace for landslide mapping and satellite comparisons.",
     paragraphs: [
-      "I built GeoSafe as a prototype for the PhilSA Space Business Innovation Challenge in 2025. It uses satellite imagery and terrain data to flag possible landslide risk hotspots.",
-      "The calculation combines vegetation change, a moisture indicator called NDWI, and slope. Google Earth Engine handles the satellite data. You can change the weights, compare time periods, and export the map layers.",
-      "A few details matter when looking at the results. NDWI doesn’t directly measure soil moisture. The sensor monitoring and AI hybrid display are simulated. This is a prototype for exploring risk indicators, so the map shouldn’t be read as a validated landslide forecast."
+      "I started GeoSafe for the PhilSA Space Business Innovation Challenge in 2025. I’ve since rebuilt it with React and FastAPI, giving the map more room and separating location assessment from satellite change analysis.",
+      "The map streams NOAH landslide susceptibility tiles, so you can inspect a location against the published mapping. For satellite comparisons, the backend reads Sentinel-2 imagery and Copernicus elevation data without Earth Engine. You can compare dates, upload local rasters and field observations, and export GeoTIFF results.",
+      "The two views answer different questions: what susceptibility has been mapped here, and what changed between these images? Neither is a live landslide warning. I want that distinction to stay clear when someone uses the app."
     ],
-    links: [{ label: "Code", href: "https://github.com/lstrjessh/PhilSA-GeoSafe-Landslide-Risk-Mapper" }]
+    links: [{ label: "Open GeoSafe", href: "https://geosafe-amber.vercel.app/" }, { label: "Code", href: "https://github.com/lstrjessh/PhilSA-GeoSafe-Landslide-Risk-Mapper" }]
   },
   {
     slug: "drowsiness-detection-on-device", period: "2025", category: "Embedded AI", title: "Running drowsiness detection on a microcontroller",

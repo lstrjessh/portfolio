@@ -175,6 +175,14 @@ body{font-family:var(--font-geist-sans),Arial,Helvetica,sans-serif;-webkit-font-
 
 .domain-suffix{display:inline-block;position:relative;top:-1px}
 
+.geosafe-scan{animation:geosafe-scan 7s ease-in-out infinite}
+.geosafe-zone{animation:geosafe-zone 7s ease-in-out infinite}
+.geosafe-trace{stroke-dasharray:1;animation:geosafe-trace 7s ease-in-out infinite}
+.geosafe-change{animation:geosafe-zone 7s ease-in-out infinite}
+@keyframes geosafe-scan{0%,10%{transform:translateX(0);opacity:0}20%{opacity:.65}75%{opacity:.65}90%,100%{transform:translateX(170px);opacity:0}}
+@keyframes geosafe-zone{0%,15%,100%{opacity:.35}45%,80%{opacity:1}}
+@keyframes geosafe-trace{0%,15%{stroke-dashoffset:1;opacity:.3}65%,90%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:.3}}
+
 /* GAKIT case study */
 .gakit-details-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--accent);margin-top:12px}
 .gakit-page a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
