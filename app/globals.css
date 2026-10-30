@@ -146,3 +146,31 @@ nav a[aria-current="page"]{color:var(--accent)}
 .about .skills p{margin:9px 0 0!important;font-size:13px!important;line-height:1.85!important}
 @media(max-width:800px){.about{grid-template-columns:minmax(0,1fr);gap:30px}.about-heading h2{max-width:none}.about .about-intro>p:first-child{font-size:19px}.about .skills{column-gap:20px;row-gap:22px}}
 @media(max-width:380px){.about .skills{grid-template-columns:1fr}}
+
+.hero{min-height:560px;padding-top:70px;padding-bottom:70px}
+.hero h1.hero-name{margin-top:0}
+@media(max-width:700px){.hero{min-height:0;padding-top:60px;padding-bottom:95px}}
+
+/* Typography */
+body{font-family:var(--font-geist-sans),Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+.hero h1,.contact h2,.section-heading h2,.about h2,.project-meta h3{font-family:inherit}
+.eyebrow,.section-label,.card-top,.hero-index,footer,.skills small{font-family:var(--font-geist-mono),monospace}
+.hero h1.hero-name{font-size:clamp(42px,7.3vw,104px);font-weight:600;letter-spacing:-.06em;line-height:1.08;margin-bottom:22px}
+.hero-content>p.hero-role{font-size:clamp(13px,1.4vw,18px);font-weight:400;letter-spacing:.005em;line-height:1.5;margin:0 0 24px;color:#afc0ba}
+.hero-content>p:not(.hero-role){max-width:56ch;font-size:16px;line-height:1.8;letter-spacing:-.01em;color:#9eafa8}
+.section-heading h2,.about-heading h2{font-weight:500;letter-spacing:-.045em}
+.project-card .card-body h3{font-weight:500;letter-spacing:-.025em;line-height:1.25}
+.project-card .card-body p{line-height:1.75;letter-spacing:0}
+@media(max-width:700px){
+  .hero h1.hero-name{font-size:clamp(36px,10vw,68px);letter-spacing:-.055em;margin-bottom:16px}
+  .hero-content>p.hero-role{font-size:13px;margin-bottom:20px}
+  .hero-content>p:not(.hero-role){font-size:14px;line-height:1.8}
+}
+
+.brand>span{font-size:18px;font-weight:500;letter-spacing:-.025em}@media(max-width:700px){.brand>span{font-size:16px}}
+
+.domain-suffix{color:var(--muted)}
+
+.domain-suffix{font-size:.85em;margin-left:6px}
+
+.domain-suffix{display:inline-block;position:relative;top:-1px}
