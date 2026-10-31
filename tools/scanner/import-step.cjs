@@ -5,7 +5,7 @@ const createOCCT = require('occt-import-js');
 async function main() {
   const input = process.argv[2];
   if (!input) throw new Error('Pass the assembled STEP file path.');
-  const destination = path.resolve('.cache/scanner');
+  const destination = path.resolve(process.argv[3] || '.cache/scanner');
   fs.mkdirSync(destination, { recursive: true });
   console.log('Reading the STEP assembly...');
   const occt = await createOCCT();

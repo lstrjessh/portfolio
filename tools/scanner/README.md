@@ -11,8 +11,10 @@ python tools/scanner/prepare-reference.py "<source-folder>/cat v1.3mf"
 node tools/scanner/server.mjs
 # In another terminal, with Playwright, Chromium, and Pillow installed:
 python tools/scanner/capture.py
+# With the portfolio running locally, capture the final camera-matched previews:
+python tools/capture-design-posters.py
 ```
 
-Source CAD and intermediate geometry stay outside version control. Only `public/scanner/assembly.webp` and `model.glb.gz` are served. Meshoptimizer reduces reference detail for the browser; original CAD files remain untouched. Exploded offsets are illustrative separations, stored as glTF component metadata.
+Source CAD and intermediate geometry stay outside version control. Only `public/scanner/default-view.webp` and `model.glb.gz` are served. Meshoptimizer reduces reference detail for the browser; original CAD files remain untouched. Exploded offsets are illustrative separations, stored as glTF component metadata.
 
 The Designs collection is defined in `app/designs/items.ts`. Each entry has a poster and a compressed GLB. The viewer loads as it approaches the viewport and renders on interaction. Models with `userData.explode` vectors also get the assembly control.

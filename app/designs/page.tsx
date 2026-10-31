@@ -3,6 +3,8 @@ import Link from "next/link";
 import SiteHeader from "../SiteHeader";
 import { designs } from "./items";
 import DesignViewer from "../DesignViewer";
+import ScanningAnimation from "../ScanningAnimation";
+import SpectrophotometerAnimation from "../SpectrophotometerAnimation";
 
 export const metadata: Metadata = {
   title: "Designs | Lester Heyrana",
@@ -18,13 +20,15 @@ export default function Designs() {
       <p>A collection of my parts, assemblies, and 3D models.</p>
     </section>
     <section className="designs-gallery" aria-label="Design collection">
-      {designs.map(design => <article className="design-entry" key={design.slug}>
-        <DesignViewer src={design.model} poster={design.image} label={design.alt} filename={`${design.slug}.glb`} />
+      {designs.map(design => <article className="design-entry" key={design.slug} id={design.slug}>
+        <DesignViewer key={design.model} src={design.model} poster={design.image} label={design.alt} filename={`${design.slug}.glb`} />
         <div className="design-entry-copy">
           <span className="section-label">{design.category}</span>
           <h2>{design.title}</h2>
           <p>{design.description}</p>
           <div className="design-entry-tags">{design.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+          {design.slug === "3d-scanner" && <ScanningAnimation />}
+          {design.slug === "spectrophotometer" && <SpectrophotometerAnimation />}
         </div>
       </article>)}
     </section>

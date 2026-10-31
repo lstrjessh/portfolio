@@ -16,6 +16,6 @@ with sync_playwright() as p:
     page.wait_for_function('window.studio?.ready', timeout=180_000)
     data = page.evaluate('window.studio.render({width:1600,height:1266,yaw:-1.6})')
     image = Image.open(BytesIO(base64.b64decode(data.split(',', 1)[1])))
-    image.save('public/scanner/assembly.webp', 'WEBP', quality=92, method=6)
-    print('Poster saved. Model:', page.evaluate('window.studio.exportModel()'))
+    image.save('.cache/scanner/source-preview.webp', 'WEBP', quality=92, method=6)
+    print('Source preview saved. Model:', page.evaluate('window.studio.exportModel()'))
     browser.close()

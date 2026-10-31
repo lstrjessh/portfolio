@@ -25,7 +25,7 @@ export default function DesignViewer({ src, poster, label, filename }: { src: st
   }, []);
 
   return <div className="design-viewer" ref={host}>
-    {!ready && <Image className="design-model-poster" src={poster} width={1600} height={1266} alt={label} sizes="(max-width: 800px) 90vw, 58vw" />}
+    <Image className={`design-model-poster${ready ? " is-ready" : ""}`} src={poster} width={1600} height={1280} alt={label} aria-hidden={ready} sizes="(max-width: 800px) 90vw, 44vw" />
     {visible && <Model src={src} label={label} filename={filename} onReady={onReady} onError={onError} />}
     {!visible && !failed && <span className="design-model-status" role="status">Loading 3D model…</span>}
     {ready && <span className="design-model-hint">Drag to rotate · Pinch or scroll to zoom</span>}

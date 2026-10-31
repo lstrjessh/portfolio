@@ -90,11 +90,12 @@ export default function DesignModel({ src, label, filename, onReady, onError }: 
         setDownloadUrl(modelUrl);
         scene.add(gltf.scene);
         const parts: { object: THREE.Object3D; position: THREE.Vector3; offset: THREE.Vector3 }[] = [];
+        const componentObjects = new Set<THREE.Object3D>();
         gltf.scene.traverse(object => {
+          if (object.userData.component !== undefined || Array.isArray(object.userData.explode)) componentObjects.add(object);
           if (Array.isArray(object.userData.explode)) parts.push({ object, position: object.position.clone(), offset: new THREE.Vector3(...object.userData.explode as [number, number, number]) });
         });
         setCanExplode(parts.length > 0);
-        const componentObjects = new Set(parts.map(part => part.object));
         let selected: THREE.Object3D | null = null;
         const originals = new Map<THREE.Mesh, THREE.Material | THREE.Material[]>();
         const highlight = (object: THREE.Object3D | null) => {
@@ -159,8 +160,19 @@ export default function DesignModel({ src, label, filename, onReady, onError }: 
         canvas.addEventListener("keydown", event => { if (event.key === "Escape") highlight(null); }, eventOptions);
         canvas.addEventListener("wheel", () => highlight(null), { ...eventOptions, passive: true });
         let amount = 0, expanded = false;
+        const framingMeshes: { mesh: THREE.Mesh; corners: THREE.Vector3[] }[] = [];
+        gltf.scene.traverse(object => {
+          if (!(object instanceof THREE.Mesh)) return;
+          object.geometry.computeBoundingBox();
+          const box = object.geometry.boundingBox;
+          if (!box) return;
+          framingMeshes.push({ mesh: object, corners: Array.from({ length: 8 }, (_, i) => new THREE.Vector3(i & 1 ? box.max.x : box.min.x, i & 2 ? box.max.y : box.min.y, i & 4 ? box.max.z : box.min.z)) });
+        });
+        const projected = new THREE.Vector3();
+        const projection = new THREE.Matrix4();
         const fit = () => {
           if (!controls) return;
+          gltf.scene.updateMatrixWorld(true);
           const bounds = new THREE.Box3().setFromObject(gltf.scene);
           const center = bounds.getCenter(new THREE.Vector3());
           const size = bounds.getSize(new THREE.Vector3());
@@ -176,8 +188,25 @@ export default function DesignModel({ src, label, filename, onReady, onError }: 
           }
           distance *= expanded ? 1.15 : 1.02;
           controls.minDistance = length * .3; controls.maxDistance = length * 7;
-          controls.target.copy(center);
           camera.position.copy(center).addScaledVector(direction, distance);
+          camera.lookAt(center);
+          // Center the projected parts, rather than the empty corners of the whole assembly box.
+          for (let iteration = 0; iteration < 4; iteration++) {
+            camera.updateMatrixWorld(true);
+            let left = Infinity, rightEdge = -Infinity, bottom = Infinity, top = -Infinity;
+            for (const { mesh, corners } of framingMeshes) {
+              projection.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse).multiply(mesh.matrixWorld);
+              for (const corner of corners) {
+                projected.copy(corner).applyMatrix4(projection);
+                left = Math.min(left, projected.x); rightEdge = Math.max(rightEdge, projected.x);
+                bottom = Math.min(bottom, projected.y); top = Math.max(top, projected.y);
+              }
+            }
+            const shift = right.clone().multiplyScalar((left + rightEdge) / 2 * distance * tangent * camera.aspect)
+              .addScaledVector(up, (bottom + top) / 2 * distance * tangent);
+            center.add(shift); camera.position.add(shift);
+          }
+          controls.target.copy(center);
           controls.update(); render();
         };
         resetView.current = () => {
@@ -199,14 +228,27 @@ export default function DesignModel({ src, label, filename, onReady, onError }: 
           };
           animation = requestAnimationFrame(tick);
         };
+        let fitted = false;
+        let previousWidth = 0, previousHeight = 0;
         const resize = () => {
           if (!renderer) return;
           const width = container.clientWidth, height = container.clientHeight;
+          if (!width || !height || width === previousWidth && height === previousHeight) return;
+          previousWidth = width; previousHeight = height;
+          const previousAspect = camera.aspect;
           renderer.setSize(width, height);
-          camera.aspect = width / height; camera.updateProjectionMatrix(); fit();
+          camera.aspect = width / height; camera.updateProjectionMatrix();
+          if (!fitted) {
+            fit(); fitted = true; setStatus(""); onReady();
+          } else if (controls) {
+            const offset = camera.position.clone().sub(controls.target);
+            offset.multiplyScalar(Math.min(previousAspect, 1) / Math.min(camera.aspect, 1));
+            camera.position.copy(controls.target).add(offset);
+            controls.update(); render();
+          }
         };
         observer = new ResizeObserver(resize); observer.observe(container);
-        resize(); setStatus(""); onReady();
+        resize();
       } catch (error) {
         if (!disposed && !controller.signal.aborted) { setFailed(true); setStatus(error instanceof Error ? error.message : "The 3D viewer could not start."); onError(); }
       }
