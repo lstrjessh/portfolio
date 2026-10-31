@@ -158,6 +158,8 @@ body{font-family:var(--font-geist-sans),Arial,Helvetica,sans-serif;-webkit-font-
 .hero h1.hero-name{font-size:clamp(42px,7.3vw,104px);font-weight:600;letter-spacing:-.06em;line-height:1.08;margin-bottom:22px}
 .hero-content>p.hero-role{font-size:clamp(13px,1.4vw,18px);font-weight:400;letter-spacing:.005em;line-height:1.5;margin:0 0 24px;color:#afc0ba}
 .hero-content>p:not(.hero-role){max-width:56ch;font-size:16px;line-height:1.8;letter-spacing:-.01em;color:#9eafa8}
+.hero-institution{white-space:nowrap}
+.hero-institution img{display:inline-block;width:1.2em;height:1.2em;margin-right:.3em;vertical-align:-.22em;object-fit:contain}
 .section-heading h2,.about-heading h2{font-weight:500;letter-spacing:-.045em}
 .project-card .card-body h3{font-weight:500;letter-spacing:-.025em;line-height:1.25}
 .project-card .card-body p{line-height:1.75;letter-spacing:0}
@@ -192,6 +194,10 @@ body{font-family:var(--font-geist-sans),Arial,Helvetica,sans-serif;-webkit-font-
 @keyframes bakas-intensity{0%,10%{stroke-dashoffset:1;opacity:.4}85%,100%{stroke-dashoffset:0;opacity:1}}
 @keyframes bakas-playhead{0%,10%{transform:translateX(0)}85%,100%{transform:translateX(128px)}}
 
+.project-title.has-favicon{flex-wrap:wrap;row-gap:8px}
+.project-title h3.project-name{display:flex;align-items:center;gap:8px;min-width:0}
+.project-name-link{display:inline-flex;align-items:center;gap:8px}
+.project-title .project-favicon{display:block;width:20px;height:20px;object-fit:contain;flex-shrink:0}
 .project-title .repo-links .live-project-link{gap:5px;padding:5px 8px;border:1px solid #719f89;border-radius:4px;background:#a9e6c516;color:var(--accent);font-size:11px;font-weight:500;line-height:1.2;white-space:nowrap;transition:background .2s,border-color .2s}
 .project-title .repo-links .live-project-link .link-icon{width:14px;height:14px}
 .project-title .repo-links .live-project-link:hover{background:var(--accent);border-color:var(--accent);color:var(--bg)}
