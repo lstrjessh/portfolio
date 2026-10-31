@@ -17,17 +17,17 @@ export const posts = [
       "The software takes absorbance data, fits calibration models, and lets you evaluate their predictions. It has a PyQt6 desktop interface, with scikit-learn, PyTorch, and XGBoost handling the modeling.",
       "The project was recognized as Best Thesis in our program and won the Academe Expo 2025 project demonstration. The code and paper are linked below if you’d like a closer look."
     ],
-    links: [{ label: "Code", href: "https://github.com/lstrjessh/Spectral-Analysis-Platform" }, { label: "Paper", href: "https://dx.doi.org/10.2139/ssrn.7397594" }]
+    links: [{ label: "Code", href: "https://github.com/lstrjessh/spectrophotometer" }, { label: "Paper", href: "https://dx.doi.org/10.2139/ssrn.7397594" }]
   },
   {
     slug: "geosafe-satellite-mapping", period: "2025", category: "Geospatial", title: "Trying satellite data for landslide mapping",
-    summary: "GeoSafe started at a PhilSA challenge. I’ve since rebuilt it into a web workspace for landslide mapping and satellite comparisons.",
+    summary: "GeoSafe started as a challenge submission. I’ve since rebuilt it into a web workspace for landslide mapping and satellite comparisons.",
     paragraphs: [
-      "I started GeoSafe for the PhilSA Space Business Innovation Challenge in 2025. I’ve since rebuilt it with React and FastAPI, giving the map more room and separating location assessment from satellite change analysis.",
+      "I submitted the original version of GeoSafe to the PhilSA Space Business Innovation Challenge in 2025. I’ve since rebuilt it with React and FastAPI, giving the map more room and separating location assessment from satellite change analysis.",
       "The map streams NOAH landslide susceptibility tiles, so you can inspect a location against the published mapping. For satellite comparisons, the backend reads Sentinel-2 imagery and Copernicus elevation data without Earth Engine. You can compare dates, upload local rasters and field observations, and export GeoTIFF results.",
       "The two views answer different questions: what susceptibility has been mapped here, and what changed between these images? Neither is a live landslide warning. I want that distinction to stay clear when someone uses the app."
     ],
-    links: [{ label: "Open GeoSafe", href: "https://geosafe-amber.vercel.app/" }, { label: "Code", href: "https://github.com/lstrjessh/PhilSA-GeoSafe-Landslide-Risk-Mapper" }]
+    links: [{ label: "Open GeoSafe", href: "https://geosafe-amber.vercel.app/" }, { label: "Code", href: "https://github.com/lstrjessh/geosafe" }]
   },
   {
     slug: "drowsiness-detection-on-device", period: "2025", category: "Embedded AI", title: "Running drowsiness detection on a microcontroller",
@@ -36,7 +36,7 @@ export const posts = [
       "This project runs drowsiness detection on a MAX78000FTHR board. I prepared the image data and trained a small CNN that could fit the device.",
       "After training, I quantized the model for the board and paired it with an embedded C detection algorithm. The repository covers the model work and the firmware that uses its predictions."
     ],
-    links: [{ label: "Code", href: "https://github.com/lstrjessh/MAX78000-FTHR-Drowsiness-Detection" }]
+    links: [{ label: "Code", href: "https://github.com/lstrjessh/drowsiness-detection" }]
   },
   {
     slug: "scanning-and-classifying-3d-shapes", period: "2024", category: "Embedded & ML", title: "From an infrared sensor to a 3D shape",
@@ -46,6 +46,6 @@ export const posts = [
       "In the C version, the firmware controls GPIO, timers, UART, ADC, and SPI through the AVR registers. It saves the captured coordinates to an SD card using FatFs.",
       "The next part is recognizing what was scanned. I used PointNet in PyTorch to classify the point clouds into shapes like spheres, cubes, and cylinders. We presented the project at COIL with MSU-IIT and Kyushu Sangyo University in 2024."
     ],
-    links: [{ label: "Scanner code", href: "https://github.com/lstrjessh/PID-Adaptive-Speed-Arduino-based-3D-Scanner-Using-an-IR-Analog-Distance-Sensor" }, { label: "Classifier code", href: "https://github.com/lstrjessh/PointNet-NeuralNetwork-Shape-Classifier-for-Arduino-3D-Scanner-Point-Cloud-Data" }]
+    links: [{ label: "Scanner code", href: "https://github.com/lstrjessh/3d-scanner" }, { label: "Classifier code", href: "https://github.com/lstrjessh/shape-classifier" }]
   }
 ];
