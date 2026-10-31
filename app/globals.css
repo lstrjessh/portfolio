@@ -183,6 +183,15 @@ body{font-family:var(--font-geist-sans),Arial,Helvetica,sans-serif;-webkit-font-
 @keyframes geosafe-zone{0%,15%,100%{opacity:.35}45%,80%{opacity:1}}
 @keyframes geosafe-trace{0%,15%{stroke-dashoffset:1;opacity:.3}65%,90%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:.3}}
 
+.bakas-track-motion{offset-path:path("M220 48C195 75 180 103 153 115S110 130 80 155");offset-rotate:0deg;offset-distance:55%;animation:bakas-track-motion 12s ease-in-out infinite}
+.bakas-vortex{transform-origin:0 0;animation:bakas-vortex 8s linear infinite}
+.bakas-intensity{stroke-dasharray:1;animation:bakas-intensity 12s ease-in-out infinite}
+.bakas-playhead{animation:bakas-playhead 12s ease-in-out infinite}
+@keyframes bakas-track-motion{0%,10%{offset-distance:0%}85%,100%{offset-distance:100%}}
+@keyframes bakas-vortex{to{transform:rotate(360deg)}}
+@keyframes bakas-intensity{0%,10%{stroke-dashoffset:1;opacity:.4}85%,100%{stroke-dashoffset:0;opacity:1}}
+@keyframes bakas-playhead{0%,10%{transform:translateX(0)}85%,100%{transform:translateX(128px)}}
+
 /* GAKIT case study */
 .gakit-details-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--accent);margin-top:12px}
 .gakit-page a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}

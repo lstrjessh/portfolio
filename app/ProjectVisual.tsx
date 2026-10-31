@@ -1,10 +1,11 @@
 import ScannerCube from "./ScannerCube";
 import GeoSafeVisual from "./GeoSafeVisual";
+import BakasVisual from "./BakasVisual";
 
 const labels: Record<string, string> = {
   "01": "GEOHAZARD MAPPING", "02": "SPECTRAL ANALYSIS", "03": "SUSCEPTIBILITY / SATELLITE CHANGE",
   "04": "POINT CLOUD CLASSIFICATION", "05": "INSTRUCTION PIPELINE", "06": "EDGE INFERENCE",
-  "07": "POINT CLOUD", "08": "WALL FOLLOWING",
+  "07": "POINT CLOUD", "08": "WALL FOLLOWING", "09": "TYPHOON TRACKING",
 };
 
 export default function ProjectVisual({ id }: { id: string }) {
@@ -33,6 +34,7 @@ export default function ProjectVisual({ id }: { id: string }) {
           <text x="45" y="25">ABSORBANCE</text><text x="440" y="185" textAnchor="end">WAVELENGTH →</text>
         </>}
         {id === "03" && <GeoSafeVisual />}
+        {id === "09" && <BakasVisual />}
         {id === "04" && <>
           <g className="classifier-sphere">
             {Array.from({length:65},(_,i)=>{const y=1-2*(i+.5)/65;const r=Math.sqrt(1-y*y);const theta=i*2.39996;return <circle key={i} cx={130+Math.cos(theta)*r*48} cy={100+y*48} r="1.8" fill="currentColor" opacity={.4+(Math.sin(theta)+1)*.25} stroke="none"/>})}
