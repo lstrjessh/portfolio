@@ -11,7 +11,7 @@ export const posts = [
     links: [{ label: "Open GeoSafe", href: "https://geosafe-amber.vercel.app/" }, { label: "Code", href: "https://github.com/lstrjessh/geosafe" }]
   },
   {
-    slug: "bakas-typhoon-tracking", period: "2025", category: "Geospatial", title: "Following typhoons with Bakas",
+    slug: "bakas-typhoon-tracking", period: "2026", category: "Geospatial", title: "Following typhoons with Bakas",
     summary: "Current advisories, satellite imagery, and past storm tracks in one map. Its tracking tools are integrated in GAKIT.",
     paragraphs: [
       "Bakas brings current typhoon advisories, satellite imagery, and past storm tracks into one map. You can follow PAGASA advisories, replay storms from the NOAA IBTrACS archive, and view near-real-time Himawari imagery.",
@@ -22,10 +22,10 @@ export const posts = [
     links: [{ label: "Open Bakas", href: "https://bakas-tau.vercel.app/" }, { label: "Code", href: "https://github.com/lstrjessh/bakas" }]
   },
   {
-    slug: "working-on-gakit", period: "2025", category: "Research", title: "What I’m working on: GAKIT",
+    slug: "working-on-gakit", period: "Current", category: "Research", title: "What I’m working on: GAKIT",
     summary: "I’m leading development on GAKIT, an internally funded research project at MSU-IIT. Here’s what we’re building.",
     paragraphs: [
-      "GAKIT started in 2025 as an internally funded research project at MSU-IIT. I’m leading development on its geohazard assessment and community flood information tools.",
+      "I’m leading development on GAKIT, an internally funded research project at MSU-IIT focused on geohazard assessment and community flood information.",
       "There’s more to it than reporting flooded streets. You can look up a location and check flood, landslide, and storm surge exposure alongside rainfall, heat, and drought information. Staff use a separate workspace to review reports and keep track of conditions.",
       "I’m using Next.js and MapLibre for the web app, with FastAPI and PostGIS behind it. There’s also an inference component running through ONNX Runtime. I’ll use this space to share more specific parts of the work as the project develops."
     ],
