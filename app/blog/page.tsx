@@ -21,7 +21,7 @@ export default function Blog() {
     <section className="blog-heading">
       <span className="section-label">BLOG / TIMELINE</span>
       <h1>Notes along<br/><span>the way.</span></h1>
-      <p>Notes on the projects I’m building and the work behind them.</p>
+      <p>Notes on the projects I’m building and the work behind them. Newest first.</p>
     </section>
     <div className="blog-timeline">
       {groups.map(({ period, entries }, index) => <section className="timeline-period" key={`${period}-${index}`} aria-labelledby={`year-${period}-${index}`}>
