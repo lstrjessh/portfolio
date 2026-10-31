@@ -9,18 +9,24 @@ export const metadata: Metadata = {
 };
 
 export default function Blog() {
-  const periods = [...new Set(posts.map(post => post.period))];
+  // Preserve the requested project order, including when a year appears again.
+  const groups: { period: string; entries: typeof posts }[] = [];
+  for (const post of posts) {
+    const previous = groups.at(-1);
+    if (previous?.period === post.period) previous.entries.push(post);
+    else groups.push({ period: post.period, entries: [post] });
+  }
   return <main className="blog-page">
     <SiteHeader blog />
     <section className="blog-heading">
       <span className="section-label">BLOG / TIMELINE</span>
       <h1>Notes along<br/><span>the way.</span></h1>
-      <p>What I’m building, working on, and figuring out. Newest first.</p>
+      <p>Notes on the projects I’m building and the work behind them.</p>
     </section>
     <div className="blog-timeline">
-      {periods.map(period => <section className="timeline-period" key={period} aria-labelledby={`year-${period}`}>
-        <h2 id={`year-${period}`}>{period}</h2>
-        <ol>{posts.filter(post => post.period === period).map(post => <li key={post.slug}>
+      {groups.map(({ period, entries }, index) => <section className="timeline-period" key={`${period}-${index}`} aria-labelledby={`year-${period}-${index}`}>
+        <h2 id={`year-${period}-${index}`}>{period}</h2>
+        <ol>{entries.map(post => <li key={post.slug}>
           <article>
             <span className="section-label">{post.category}</span>
             <h3><Link href={`/blog/${post.slug}`}>{post.title}<span aria-hidden="true">↗</span></Link></h3>

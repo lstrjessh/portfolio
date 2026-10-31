@@ -1,9 +1,31 @@
 export const posts = [
   {
-    slug: "working-on-gakit", period: "Current", category: "Research", title: "What I’m working on: GAKIT",
+    slug: "geosafe-satellite-mapping", period: "2025", category: "Geospatial", title: "Trying satellite data for landslide mapping",
+    summary: "GeoSafe brings together landslide mapping and satellite comparisons. Its assessment tools are integrated in GAKIT.",
+    paragraphs: [
+      "I submitted the original version of GeoSafe to the PhilSA Space Business Innovation Challenge in 2025. I’ve since rebuilt it with React and FastAPI, giving the map more room and separating location assessment from satellite change analysis.",
+      "The map streams NOAH landslide susceptibility tiles, so you can inspect a location against the published mapping. For satellite comparisons, the backend reads Sentinel-2 imagery and Copernicus elevation data without Earth Engine. You can compare dates, upload local rasters and field observations, and export GeoTIFF results.",
+      "Its landslide assessment tools are integrated in GAKIT.",
+      "The two views answer different questions: what susceptibility has been mapped here, and what changed between these images? Neither is a live landslide warning. I want that distinction to stay clear when someone uses the app."
+    ],
+    links: [{ label: "Open GeoSafe", href: "https://geosafe-amber.vercel.app/" }, { label: "Code", href: "https://github.com/lstrjessh/geosafe" }]
+  },
+  {
+    slug: "bakas-typhoon-tracking", period: "2025", category: "Geospatial", title: "Following typhoons with Bakas",
+    summary: "Current advisories, satellite imagery, and past storm tracks in one map. Its tracking tools are integrated in GAKIT.",
+    paragraphs: [
+      "Bakas brings current typhoon advisories, satellite imagery, and past storm tracks into one map. You can follow PAGASA advisories, replay storms from the NOAA IBTrACS archive, and view near-real-time Himawari imagery.",
+      "I wanted it to be easy to explore a storm without jumping between sites. You can search by name or season, step through its track, and inspect the reported wind speed and pressure. Track files and satellite playback can be downloaded too.",
+      "Its typhoon tracking tools are integrated in GAKIT. Bakas gives those tools a focused workspace for exploring current and archived storms.",
+      "The satellite imagery has its own timestamps. Replaying an old storm doesn’t turn the latest satellite view into historical imagery, so the two timelines stay separate."
+    ],
+    links: [{ label: "Open Bakas", href: "https://bakas-tau.vercel.app/" }, { label: "Code", href: "https://github.com/lstrjessh/bakas" }]
+  },
+  {
+    slug: "working-on-gakit", period: "2025", category: "Research", title: "What I’m working on: GAKIT",
     summary: "I’m leading development on GAKIT, an internally funded research project at MSU-IIT. Here’s what we’re building.",
     paragraphs: [
-      "Right now, I’m working as the lead developer for Project GAKIT at MSU-IIT. It’s an internally funded research project focused on geohazard assessment and community flood information.",
+      "GAKIT started in 2025 as an internally funded research project at MSU-IIT. I’m leading development on its geohazard assessment and community flood information tools.",
       "There’s more to it than reporting flooded streets. You can look up a location and check flood, landslide, and storm surge exposure alongside rainfall, heat, and drought information. Staff use a separate workspace to review reports and keep track of conditions.",
       "I’m using Next.js and MapLibre for the web app, with FastAPI and PostGIS behind it. There’s also an inference component running through ONNX Runtime. I’ll use this space to share more specific parts of the work as the project develops."
     ],
@@ -18,16 +40,6 @@ export const posts = [
       "The project was recognized as Best Thesis in our program and won the Academe Expo 2025 project demonstration. The code and paper are linked below if you’d like a closer look."
     ],
     links: [{ label: "Code", href: "https://github.com/lstrjessh/spectrophotometer" }, { label: "Paper", href: "https://dx.doi.org/10.2139/ssrn.7397594" }]
-  },
-  {
-    slug: "geosafe-satellite-mapping", period: "2025", category: "Geospatial", title: "Trying satellite data for landslide mapping",
-    summary: "GeoSafe started as a challenge submission. I’ve since rebuilt it into a web workspace for landslide mapping and satellite comparisons.",
-    paragraphs: [
-      "I submitted the original version of GeoSafe to the PhilSA Space Business Innovation Challenge in 2025. I’ve since rebuilt it with React and FastAPI, giving the map more room and separating location assessment from satellite change analysis.",
-      "The map streams NOAH landslide susceptibility tiles, so you can inspect a location against the published mapping. For satellite comparisons, the backend reads Sentinel-2 imagery and Copernicus elevation data without Earth Engine. You can compare dates, upload local rasters and field observations, and export GeoTIFF results.",
-      "The two views answer different questions: what susceptibility has been mapped here, and what changed between these images? Neither is a live landslide warning. I want that distinction to stay clear when someone uses the app."
-    ],
-    links: [{ label: "Open GeoSafe", href: "https://geosafe-amber.vercel.app/" }, { label: "Code", href: "https://github.com/lstrjessh/geosafe" }]
   },
   {
     slug: "drowsiness-detection-on-device", period: "2025", category: "Embedded AI", title: "Running drowsiness detection on a microcontroller",

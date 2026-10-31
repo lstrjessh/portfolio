@@ -9,6 +9,7 @@ const visuals: Record<string, string[]> = {
   "working-on-gakit": ["01"],
   "portable-spectrophotometer": ["02"],
   "geosafe-satellite-mapping": ["03"],
+  "bakas-typhoon-tracking": ["09"],
   "drowsiness-detection-on-device": ["06"],
   "scanning-and-classifying-3d-shapes": ["07", "04"],
 };
