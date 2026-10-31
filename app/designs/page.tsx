@@ -19,7 +19,7 @@ export default function Designs() {
     </section>
     <section className="designs-gallery" aria-label="Design collection">
       {designs.map(design => <article className="design-entry" key={design.slug}>
-        <DesignViewer src={design.model} poster={design.image} label={design.alt} />
+        <DesignViewer src={design.model} poster={design.image} label={design.alt} filename={`${design.slug}.glb`} />
         <div className="design-entry-copy">
           <span className="section-label">{design.category}</span>
           <h2>{design.title}</h2>
