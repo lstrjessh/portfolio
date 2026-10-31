@@ -42,7 +42,7 @@ export const posts = [
     slug: "scanning-and-classifying-3d-shapes", period: "2024", category: "Embedded & ML", title: "From an infrared sensor to a 3D shape",
     summary: "A look at the scanner and classifier we presented at COIL in 2024.",
     paragraphs: [
-      "I worked on a low-cost 3D scanner that uses an infrared distance sensor and stepper motors to capture an object’s shape. The repo has both an Arduino sketch and a bare-metal C version for the ATmega328P.",
+      "I worked on a 3D scanner that uses an infrared distance sensor and stepper motors to capture an object’s shape. The repo has both an Arduino sketch and a bare-metal C version for the ATmega328P.",
       "In the C version, the firmware controls GPIO, timers, UART, ADC, and SPI through the AVR registers. It saves the captured coordinates to an SD card using FatFs.",
       "The next part is recognizing what was scanned. I used PointNet in PyTorch to classify the point clouds into shapes like spheres, cubes, and cylinders. We presented the project at COIL with MSU-IIT and Kyushu Sangyo University in 2024."
     ],
