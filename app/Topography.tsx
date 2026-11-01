@@ -51,6 +51,8 @@ export interface TopographyProps {
   intro?: boolean;
   lightMode?: boolean;
   dpr?: number;
+  /** Optional render-rate cap in Hz (e.g. 30). 0/undefined = uncapped. */
+  fps?: number;
   className?: string;
   style?: CSSProperties;
 }
@@ -803,6 +805,7 @@ const Topography = ({
   intro = true,
   lightMode = false,
   dpr,
+  fps,
   className = '',
   style
 }: TopographyProps) => {
@@ -839,7 +842,8 @@ const Topography = ({
     glitch: clamp(glitch, 0, 1),
     intro,
     lightMode,
-    dpr
+    dpr,
+    fps: Math.max(0, fps ?? 0)
   };
   const settingsRef = useRef(settings);
   settingsRef.current = settings;
@@ -1405,6 +1409,12 @@ const Topography = ({
       if (!visible || document.hidden) return;
       const s = settingsRef.current;
       if (s.dpr !== sizedDpr) resize();
+      // Frame-rate cap: skip ticks ahead of the target cadence, re-arming the rAF
+      // without advancing `last` so dt stays correct on the next rendered frame.
+      if (s.fps > 0 && last && now - last < (1000 / Math.min(s.fps, 120)) * 0.9) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
       const dt = last ? clamp((now - last) / 1000, 0, 1 / 20) : 1 / 60;
       last = now;
 
@@ -1528,6 +1538,9 @@ const Topography = ({
     };
 
     const onPointerMove = (event: PointerEvent) => {
+      // Touch movement would otherwise re-run the pick() raymarch (hundreds of steps)
+      // every frame while scrolling or dragging; taps are handled once onPointerDown.
+      if (event.pointerType === 'touch') return;
       const { x, y, inside } = locate(event);
       const was = pointer.inside;
       pointer.inside = inside;
@@ -1546,6 +1559,10 @@ const Topography = ({
       pointer.y = y;
       pointer.inside = true;
       wake();
+      // Touch: disengage right after registering the tap. Tap pulses still spawn below
+      // (one pick()), but continuous hover tracking — and its per-frame pick() cost
+      // while a finger scrolls through the hero — stays desktop-only.
+      if (event.pointerType === 'touch') pointer.inside = false;
       if (s.glitch > 0 && !reduce) {
         glitch.until = state.clock + 0.16;
         glitch.roll = 0;

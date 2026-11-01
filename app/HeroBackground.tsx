@@ -32,13 +32,15 @@ export default function HeroBackground() {
         fog={desktop ? 0.4 : 0.5}
         brightness={desktop ? 0.7 : 0.65}
         opacity={0.85}
-        speed={desktop ? 0.22 : 0.18}
+        speed={desktop ? 0.22 : 0.15}
+        morph={desktop ? 0.2 : 0.12}
         elevation={desktop ? 1.2 : 1}
         hoverEffect="light"
         mouseStrength={0.55}
         clickEffect="pulse"
         markers="dots"
         dpr={desktop ? undefined : 1.3}
+        fps={desktop ? undefined : 30}
         intro
       />
     </div>
