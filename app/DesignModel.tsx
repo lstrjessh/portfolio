@@ -42,8 +42,10 @@ export default function DesignModel({ src, label, filename, onReady, onError }: 
     let scene: THREE.Scene | undefined;
     let environment: THREE.Texture | undefined;
     let observer: ResizeObserver | undefined;
+    let viewportObserver: IntersectionObserver | undefined;
     let animation = 0;
     let hoverFrame = 0;
+    let renderFrame = 0;
     let modelUrl: string | undefined;
     let releaseSelection = () => {};
     const highlightedMaterials = new Map<THREE.Material, THREE.Material>();
@@ -77,7 +79,21 @@ export default function DesignModel({ src, label, filename, onReady, onError }: 
         controls.enableDamping = false;
         controls.enablePan = true;
         controls.listenToKeyEvents(renderer.domElement);
-        const render = () => { if (!disposed && renderer && scene) renderer.render(scene, camera); };
+        let inViewport = false;
+        // Controls, fitting and resizing can all request a draw in the same frame.
+        const render = () => {
+          if (disposed || renderFrame || !inViewport || document.hidden) return;
+          renderFrame = requestAnimationFrame(() => {
+            renderFrame = 0;
+            if (!disposed && inViewport && !document.hidden && renderer && scene) renderer.render(scene, camera);
+          });
+        };
+        viewportObserver = new IntersectionObserver(([entry]) => {
+          inViewport = entry.isIntersecting;
+          if (inViewport) render();
+        });
+        viewportObserver.observe(container);
+        document.addEventListener("visibilitychange", render, { signal: controller.signal });
         controls.addEventListener("change", render);
         const response = await fetch(src, { signal: controller.signal });
         if (!response.ok || !response.body) throw new Error("The model could not load.");
@@ -255,7 +271,7 @@ export default function DesignModel({ src, label, filename, onReady, onError }: 
     };
     void load();
     return () => {
-      disposed = true; controller.abort(); cancelAnimationFrame(animation); cancelAnimationFrame(hoverFrame); observer?.disconnect(); controls?.dispose();
+      disposed = true; controller.abort(); cancelAnimationFrame(animation); cancelAnimationFrame(hoverFrame); cancelAnimationFrame(renderFrame); observer?.disconnect(); viewportObserver?.disconnect(); controls?.dispose();
       releaseSelection();
       highlightedMaterials.forEach(material => material.dispose());
       if (modelUrl) URL.revokeObjectURL(modelUrl);
