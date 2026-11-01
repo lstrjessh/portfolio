@@ -27,7 +27,7 @@ export default function HeroBackground() {
         lineCount={desktop ? 26 : 22}
         lineWidth={1.1}
         tilt={24}
-        glow={desktop ? 0.75 : 0.55}
+        glow={desktop ? 0.75 : 0}
         depthOfField={0.3}
         fog={desktop ? 0.4 : 0.5}
         brightness={desktop ? 0.7 : 0.65}
@@ -37,9 +37,9 @@ export default function HeroBackground() {
         elevation={desktop ? 1.2 : 1}
         hoverEffect="light"
         mouseStrength={0.55}
-        clickEffect="pulse"
-        markers="dots"
-        dpr={desktop ? undefined : 1.3}
+        clickEffect={desktop ? "pulse" : "none"}
+        markers={desktop ? "dots" : "none"}
+        dpr={desktop ? undefined : 1}
         fps={desktop ? undefined : 30}
         intro
       />
